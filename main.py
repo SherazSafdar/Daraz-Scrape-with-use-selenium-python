@@ -1,5 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 #To save the product details list to an Excel sheet
@@ -8,17 +7,11 @@ import pandas as pd
 # Create a list to store product details
 products_list = []
 
-# Create a dictionary to store product details
-products_dict = {}
-
 # Initialize the webdriver
 driver = webdriver.Firefox()
 
 # Navigate to the Daraz website
 driver.get("https://www.daraz.pk/wow/i/pk/landingpage/flash-sale")
-
-# Wait for the page to load
-time.sleep(2)
 
 # Define the scroll increment (in pixels)(speed)
 scroll_increment = 250

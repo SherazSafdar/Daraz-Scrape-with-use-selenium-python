@@ -53,15 +53,18 @@ while True:
 
 
 # Find the product elements
-products = driver.find_elements(By.XPATH, '//*[@id="campaign-1689620400000"]/div/a')
-# product_elements = driver.find_elements(By.CSS_SELECTOR, ".item-list-content a")
+# products = driver.find_elements(By.XPATH, '//*[@id="campaign-1689620400000"]/div/a')
+products = driver.find_elements(By.CSS_SELECTOR, ".item-list-content a")
 
 # Iterate over each product element and extract the details
 for product in products:
     product_name = product.find_element(By.CLASS_NAME, "sale-title").text
     product_price = product.find_element(By.CLASS_NAME, "sale-price").text
     product_originprice = product.find_element(By.CLASS_NAME, "origin-price-value").text
-    product_discount = product.find_element(By.CLASS_NAME, "discount").text
+    try:
+        product_discount = product.find_element(By.CLASS_NAME, "discount").text
+    except:
+        product_discount = ''
 
     # Store product information in a dictionary
     product_details = {
@@ -80,13 +83,13 @@ df = pd.DataFrame(products_list)
 # Print the list containing the product details
 print('output:', products_list)
 
-# Define the file name for the Excel sheet
-excel_file = "product_details.xlsx"
+# Define the file name for the CSV file
+csv_file = "product_details.csv"
 
-# Save the DataFrame to an Excel file
-df.to_excel(excel_file, index=False)
+# Save the DataFrame to a CSV file
+df.to_csv(csv_file, index=False)
 
-print("Product details saved to", excel_file)
+print("Product details saved to", csv_file)
 
 # Close the browser
 driver.quit()
